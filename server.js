@@ -6,6 +6,10 @@ const Persona = require("./models/Persona");
 const Modificacion = require("./models/Modificacion");
 
 const app = express();
+app.get("/", (req, res) => {
+    res.send("✅ Servidor corriendo en Railway correctamente");
+});
+
 
 // ✅ Configuración CORS para permitir solicitudes solo desde tu frontend en GitHub Pages
 app.use(cors({
@@ -13,6 +17,7 @@ app.use(cors({
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type"
 }));
+
 
 app.use(express.json());
 
