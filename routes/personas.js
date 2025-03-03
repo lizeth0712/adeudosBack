@@ -44,7 +44,7 @@ router.post("/historial", async (req, res) => {
     }
 });*/
 
-// ✅ Obtener historial por nombre
+// ✅ Obtener historial por nombre en tabla historial 
 router.get("/historial/:nombre", async (req, res) => {
     const { nombre } = req.params;
     
