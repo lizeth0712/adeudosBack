@@ -3,6 +3,7 @@ const Persona = require("../models/Persona");
 const Modificacion = require("../models/Modificacion");
 const router = express.Router();
 const cors = require("cors");
+//hola
 
 app.use(cors({
     origin: "*", // 🔥 Asegúrate de que la URL es la correcta
