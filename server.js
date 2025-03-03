@@ -2,7 +2,13 @@ const express = require("express");
 const Persona = require("../models/Persona");
 const Modificacion = require("../models/Modificacion");
 const router = express.Router();
+const cors = require("cors");
 
+app.use(cors({
+    origin: "*", // 🔥 Asegúrate de que la URL es la correcta
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type"
+}));
 // ✅ Obtener todas las personas
 router.get("/", async (req, res) => {
     try {
