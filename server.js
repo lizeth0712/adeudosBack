@@ -9,7 +9,7 @@ const app = express();
 
 // ✅ Configuración CORS para permitir solicitudes solo desde tu frontend en GitHub Pages
 app.use(cors({
-    origin: "https://lizeth0712.github.io/adeudosFront", // Asegúrate de que esta URL es la correcta
+    origin: "https://lizeth0712.github.io/adeudosFront/", // Asegúrate de que esta URL es la correcta
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type"
 }));
