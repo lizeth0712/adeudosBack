@@ -19,10 +19,6 @@ const Modificacion = db.define("historial", {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    cantidad_actual: {  // 🔥 Nueva columna: Cantidad actual después de la modificación
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
     fecha: {
         type: DataTypes.DATEONLY,
         allowNull: false
