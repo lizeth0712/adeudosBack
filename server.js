@@ -21,8 +21,14 @@ const personaRoutes = require("./routes/personas");
 app.use("/api/personas", personaRoutes);
 
 // ✅ Sincronizar la base de datos
-db.sync({ alter: true }) // ⚡ Esto asegurará que las tablas se creen si no existen
-    .then(() => console.log("✅ Base de datos sincronizada correctamente"))
+db.sync() // ⚡ Sincroniza todas las tablas sin perder datos
+    .then(() => {
+        console.log("✅ Base de datos sincronizada correctamente");
+
+        // 🔥 Crear la tabla "historial" si no existe (sin afectar otras tablas)
+        return Modificacion.sync({ alter: true });
+    })
+    .then(() => console.log("✅ Tabla 'historial' verificada o creada"))
     .catch((error) => console.error("❌ Error al sincronizar la base de datos:", error));
 
 const PORT = process.env.PORT || 3000;

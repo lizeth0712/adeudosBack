@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
 
-const Modificacion = db.define("historial", { // Aquí especificamos que la tabla se llamará "historial"
+const Modificacion = db.define("historial", { // 🔥 La tabla en BD se llamará "historial"
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -24,8 +24,8 @@ const Modificacion = db.define("historial", { // Aquí especificamos que la tabl
         allowNull: false
     }
 }, {
-    timestamps: false, // No agregar columnas createdAt y updatedAt
-    tableName: "historial" // 🔥 Esto le dice a Sequelize que la tabla en BD se llamará "historial"
+    timestamps: false, // 🔥 Evita que Sequelize agregue createdAt y updatedAt
+    tableName: "historial" // 🔥 Esto le dice a Sequelize que la tabla en BD se llame "historial"
 });
 
 module.exports = Modificacion;
