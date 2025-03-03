@@ -9,6 +9,9 @@ const app = express();
 app.get("/", (req, res) => {
     res.send("✅ Servidor corriendo en Railway correctamente");
 });
+app.get("/test", (req, res) => {
+    res.json({ mensaje: "Ruta de prueba funcionando" });
+});
 
 
 // ✅ Configuración CORS para permitir solicitudes solo desde tu frontend en GitHub Pages
@@ -24,6 +27,7 @@ app.use(express.json());
 // ✅ Importar rutas
 const personaRoutes = require("./routes/personas");
 app.use("/api/personas", personaRoutes);
+
 
 // ✅ Sincronizar la base de datos
 db.sync() // ⚡ Sincroniza todas las tablas sin perder datos
