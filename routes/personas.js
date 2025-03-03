@@ -13,6 +13,7 @@ router.put("/:id", async (req, res) => {
 
         // ✅ Guardar en la tabla "historial" usando los valores del formulario
         await Modificacion.create({
+            id,
             nombre, // 📌 Tomamos el nombre del formulario
             tipo: accion, // "agregar" o "quitar"
             cantidad,
