@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./db");
+const Modificacion = require("./models/Modificacion");
+
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.use(express.json());
 // Importar rutas
 const personaRoutes = require("./routes/personas");
 app.use("/api/personas", personaRoutes);
+
+//const Modificacion = require("./models/Modificacion");
 
 // Sincronizar la base de datos
 db.sync()
