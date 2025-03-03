@@ -27,7 +27,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-/*✅ Guardar historial de modificaciones en "historial"
+// ✅ Guardar historial de modificaciones en "historial"
 router.post("/historial", async (req, res) => {
     const { nombre, tipo, cantidad, fecha } = req.body;
 
@@ -42,9 +42,9 @@ router.post("/historial", async (req, res) => {
         console.error("❌ Error al guardar en historial:", error);
         res.status(500).json({ error: "Error al guardar historial" });
     }
-});*/
+});
 
-// ✅ Obtener historial por nombre en tabla historial 
+// ✅ Obtener historial por nombre
 router.get("/historial/:nombre", async (req, res) => {
     const { nombre } = req.params;
     
