@@ -1,5 +1,5 @@
 const express = require("express");
-const Persona = require("../models/Persona");
+const Persona = require("../backend/models/Persona");
 const Modificacion = require("../models/Modificacion");
 const router = express.Router();
 const cors = require("cors");
