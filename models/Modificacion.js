@@ -1,11 +1,11 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
 
-const Modificacion = db.define("Modificacion", {
+const Modificacion = db.define("modificacion", {
     id: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     nombre: {
         type: DataTypes.STRING,
@@ -20,9 +20,11 @@ const Modificacion = db.define("Modificacion", {
         allowNull: false
     },
     fecha: {
-        type: DataTypes.DATE, // Solo guarda la fecha (sin hora)
+        type: DataTypes.DATEONLY, // Solo guarda la fecha, sin la hora
         allowNull: false
     }
+}, {
+    timestamps: false
 });
 
 module.exports = Modificacion;
