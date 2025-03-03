@@ -1,40 +1,46 @@
-const express = require("express");
+const express = require("express"); 
 const Persona = require("../models/Persona");
 const Modificacion = require("../models/Modificacion");
 const router = express.Router();
 
-// ✅ Modificar cantidad y guardar en "historial"
+// ✅ Modificar cantidad y actualizar en "personas"
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { nombre, cantidad, accion, fecha } = req.body; // 📌 Ahora recibimos el nombre directamente
+    const { cantidad, accion } = req.body; // Ahora NO necesitamos recibir el nombre aquí
 
     try {
-        console.log("🔄 Intentando modificar:", { id, nombre, cantidad, accion, fecha });
+        console.log("🔄 Modificando persona:", { id, cantidad, accion });
 
-        // ✅ Guardar en la tabla "historial" usando los valores del formulario
-        await Modificacion.create({
-            id,
-            nombre, // 📌 Tomamos el nombre del formulario
-            tipo: accion, // "agregar" o "quitar"
-            cantidad,
-            fecha
-        });
-
-        console.log("✅ Modificación guardada en historial");
-
-        // ✅ Ahora sí modificamos la persona en la tabla "personas"
+        // ✅ Buscar la persona en la tabla "personas"
         const persona = await Persona.findByPk(id);
         if (!persona) return res.status(404).json({ error: "Persona no encontrada" });
 
+        // ✅ Actualizar la cantidad en la tabla "personas"
         persona.cantidad = accion === "agregar" ? persona.cantidad + cantidad : persona.cantidad - cantidad;
         await persona.save();
 
         console.log("✅ Cantidad actualizada en personas:", persona.cantidad);
-
-        res.json({ mensaje: "Cantidad modificada y guardada en historial", persona });
+        res.json({ mensaje: "Cantidad modificada", persona });
     } catch (error) {
-        console.error("❌ Error al modificar:", error);
+        console.error("❌ Error al modificar persona:", error);
         res.status(500).json({ error: "Error al modificar persona" });
+    }
+});
+
+// ✅ Guardar historial de modificaciones en "historial"
+router.post("/historial", async (req, res) => {
+    const { nombre, tipo, cantidad, fecha } = req.body;
+
+    try {
+        console.log("📤 Guardando en historial:", { nombre, tipo, cantidad, fecha });
+
+        await Modificacion.create({ nombre, tipo, cantidad, fecha });
+
+        console.log("✅ Modificación guardada en historial");
+        res.json({ mensaje: "Historial guardado con éxito" });
+    } catch (error) {
+        console.error("❌ Error al guardar en historial:", error);
+        res.status(500).json({ error: "Error al guardar historial" });
     }
 });
 
