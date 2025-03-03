@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
-const Persona = require("./Persona");
 
 const Modificacion = db.define("Modificacion", {
     id: {
@@ -8,25 +7,21 @@ const Modificacion = db.define("Modificacion", {
         autoIncrement: true,
         primaryKey: true
     },
-    personaId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Persona,
-            key: "id"
-        }
+    nombre: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    tipo: {
+        type: DataTypes.STRING, // "agregar" o "quitar"
+        allowNull: false
     },
     cantidad: {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    accion: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     fecha: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
+        type: DataTypes.DATE, // Solo guarda la fecha (sin hora)
+        allowNull: false
     }
 });
 

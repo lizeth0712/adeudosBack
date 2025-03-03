@@ -27,24 +27,24 @@ router.get("/", async (req, res) => {
     }
 });
 
-// ✅ Modificar cantidad de dinero de una persona y registrar el cambio
+// ✅ Modificar cantidad de dinero y guardar en historial
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
-    const { cantidad, accion } = req.body;
+    const { cantidad, accion, fecha } = req.body;
 
     try {
         const persona = await Persona.findByPk(id);
         if (!persona) return res.status(404).json({ error: "Persona no encontrada" });
 
-        // ✅ Guardar la modificación en la tabla de historial
+        // ✅ Guardar en la tabla de Modificaciones
         await Modificacion.create({
-            personaId: id,
+            nombre: persona.nombre,
+            tipo: accion,
             cantidad,
-            accion,
-            fecha: new Date()
+            fecha
         });
 
-        // ✅ Actualizar la cantidad de la persona
+        // ✅ Actualizar el saldo de la persona
         persona.cantidad = accion === "agregar" ? persona.cantidad + cantidad : persona.cantidad - cantidad;
         await persona.save();
 
@@ -55,20 +55,20 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// ✅ Obtener historial de modificaciones de una persona
-router.get("/:id/modificaciones", async (req, res) => {
-    const { id } = req.params;
+// ✅ Obtener historial de modificaciones por nombre de cliente
+router.get("/historial/:nombre", async (req, res) => {
+    const { nombre } = req.params;
 
     try {
         const modificaciones = await Modificacion.findAll({
-            where: { personaId: id },
-            order: [["fecha", "DESC"]] // Ordenado por fecha más reciente
+            where: { nombre },
+            order: [["fecha", "DESC"]]
         });
 
         res.json(modificaciones);
     } catch (error) {
-        console.error("Error al obtener historial de modificaciones:", error);
-        res.status(500).json({ error: "Error al obtener historial de modificaciones" });
+        console.error("Error al obtener historial:", error);
+        res.status(500).json({ error: "Error al obtener historial" });
     }
 });
 
