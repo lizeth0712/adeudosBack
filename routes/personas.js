@@ -3,6 +3,16 @@ const Persona = require("../models/Persona");
 const Modificacion = require("../models/Modificacion");
 const router = express.Router();
 
+// ✅ Obtener todas las personas
+router.get("/", async (req, res) => {
+    try {
+        const personas = await Persona.findAll();
+        res.json(personas);
+    } catch (error) {
+        console.error("❌ Error al obtener personas:", error);
+        res.status(500).json({ error: "Error al obtener personas" });
+    }
+});
 // ✅ Modificar cantidad y actualizar en "personas"
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
