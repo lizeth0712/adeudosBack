@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+<<<<<<< HEAD
     "dev": "nodemon server.js"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> ef8bdf7 (Corrigiendo package.json y agregando dependencias)
   },
   "dependencies": {
     "dotenv": "^16.4.7",
