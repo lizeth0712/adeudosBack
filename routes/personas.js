@@ -7,6 +7,7 @@ const router = express.Router();
 // ✅ Registrar persona
 router.post("/", async (req, res) => {
     try {
+        console.log("📥 Recibiendo datos:", req.body); 
         const { nombre, cantidad, fecha } = req.body;
         const nuevaPersona = await Persona.create({ nombre, cantidad, fecha });
         res.json(nuevaPersona);
