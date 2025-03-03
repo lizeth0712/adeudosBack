@@ -1,6 +1,6 @@
 const express = require("express");
 const Persona = require("../models/Persona");
-const Modificacion = require("../model.s/Modificacion");
+const Modificacion = require("../models/Modificacion");
 const router = express.Router();
 const cors = require("cors");
 //hola
