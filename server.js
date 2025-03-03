@@ -4,8 +4,15 @@ const cors = require("cors");
 const db = require("./db");
 
 const app = express();
-app.use(cors());
-app.use(express .json());
+
+// Configuración CORS para permitir solicitudes solo desde tu frontend
+app.use(cors({
+    origin: "https://lizeth0712.github.io/adeudosFront/", // Asegúrate de cambiarlo por tu URL real de GitHub Pages
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type"
+}));
+
+app.use(express.json());
 
 // Importar rutas
 const personaRoutes = require("./routes/personas");
