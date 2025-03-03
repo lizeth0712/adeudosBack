@@ -1,31 +1,32 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db");
 
-const Modificacion = db.define("historial", { // 🔥 La tabla en BD se llamará "historial"
+const Modificacion = db.define("historial", {
     id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        primaryKey: true
     },
     nombre: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    tipo: {
-        type: DataTypes.STRING, // "agregar" o "quitar"
+    tipo: {  // Agregar o Quitar
+        type: DataTypes.STRING,
         allowNull: false
     },
-    cantidad: {
+    cantidad: {  // Cantidad de la modificación
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    cantidad_actual: {  // 🔥 Nueva columna: Cantidad actual después de la modificación
         type: DataTypes.FLOAT,
         allowNull: false
     },
     fecha: {
-        type: DataTypes.DATEONLY, // Solo guarda la fecha, sin la hora
+        type: DataTypes.DATEONLY,
         allowNull: false
     }
-}, {
-    timestamps: false, // 🔥 Evita que Sequelize agregue createdAt y updatedAt
-    tableName: "historial" // 🔥 Esto le dice a Sequelize que la tabla en BD se llame "historial"
 });
 
 module.exports = Modificacion;
